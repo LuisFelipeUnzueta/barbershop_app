@@ -1,6 +1,9 @@
 # barbershop_app
 
 A new Flutter project.
+  - Flutter 3.10.6
+  - Java 21
+  - Gradle 8.5
 
 ## Getting Started
 
