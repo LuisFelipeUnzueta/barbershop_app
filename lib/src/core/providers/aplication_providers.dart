@@ -6,9 +6,7 @@ import 'package:barbershop_app/src/repositories/barbershop/barbershop_repository
 import 'package:barbershop_app/src/repositories/user/user_repository.dart';
 import 'package:barbershop_app/src/repositories/user/user_repository_impl.dart';
 import 'package:barbershop_app/src/services/users_login/user_login_service_impl.dart';
-import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
 import '../../model/barbershop_model.dart';
 import '../../services/users_login/user_login_service.dart';
 
