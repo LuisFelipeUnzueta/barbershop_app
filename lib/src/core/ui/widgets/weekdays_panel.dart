@@ -53,18 +53,34 @@ class WeekdaysPanel extends StatelessWidget {
   }
 }
 
-class ButtonDay extends StatelessWidget {
+class ButtonDay extends StatefulWidget {
   final String label;
 
   const ButtonDay({super.key, required this.label});
 
   @override
+  State<ButtonDay> createState() => _ButtonDayState();
+}
+
+class _ButtonDayState extends State<ButtonDay> {
+  var selected = false;
+
+  @override
   Widget build(BuildContext context) {
+    final textColor = selected ? Colors.white : ColorsConstants.grey;
+    var buttonColor = selected ? ColorsConstants.brown : Colors.white;
+    
+
+
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: InkWell(
         borderRadius: BorderRadius.circular(8),
-        onTap: (){},
+        onTap: (){
+          setState(() {
+            selected = true;
+          });
+        },
         child: Container(
           width: 40,
           height: 56,
@@ -74,7 +90,7 @@ class ButtonDay extends StatelessWidget {
               border: Border.all(color: ColorsConstants.grey)),
           child: Center(
             child: Text(
-              label,
+              widget.label,
               style: const TextStyle(
                   fontSize: 12,
                   color: ColorsConstants.grey,

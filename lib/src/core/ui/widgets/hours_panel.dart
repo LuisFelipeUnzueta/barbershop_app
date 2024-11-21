@@ -29,7 +29,7 @@ class HoursPanel extends StatelessWidget {
           children: [
             for (int i = startTime; i <= endTime; i++)
               TimeButton(
-                label: '$i',
+                label: '${i.toString().padLeft(2, '0')}:00',
               )
           ],
         )
