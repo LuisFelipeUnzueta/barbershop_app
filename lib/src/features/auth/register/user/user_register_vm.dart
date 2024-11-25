@@ -1,4 +1,3 @@
-
 import 'package:asyncstate/asyncstate.dart';
 import 'package:barbershop_app/src/core/fp/either.dart';
 import 'package:barbershop_app/src/core/providers/aplication_providers.dart';

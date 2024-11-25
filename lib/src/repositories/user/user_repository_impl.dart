@@ -6,12 +6,13 @@ import 'package:barbershop_app/src/core/exceptions/repository_exception.dart';
 import 'package:barbershop_app/src/core/fp/either.dart';
 import 'package:barbershop_app/src/core/fp/nil.dart';
 import 'package:barbershop_app/src/core/restClient/rest_client.dart';
+
 import 'package:barbershop_app/src/model/user_model.dart';
 import 'package:barbershop_app/src/repositories/user/user_repository.dart';
 import 'package:dio/dio.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  final RestClient restClient;
+final RestClient restClient;
 
   UserRepositoryImpl({required this.restClient});
 
@@ -56,7 +57,7 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<Either<RepositoryException, Nil>> registterAdmin(
+  Future<Either<RepositoryException, Nil>> registerAdmin(
       ({String email, String name, String password}) userData) async {
     try {
       await restClient.unAuth.post('/users', data: {

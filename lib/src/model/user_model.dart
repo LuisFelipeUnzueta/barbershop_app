@@ -34,7 +34,7 @@ class UserModelAdm extends UserModel {
   });
 
   factory UserModelAdm.fromMap(Map<String, dynamic> json) {
-    return switch (json) {
+    return switch(json) {
       {
         'id': final int id,
         'name': final String name,
@@ -69,7 +69,7 @@ class UserModelEmployee extends UserModel {
   });
 
    factory UserModelEmployee.fromMap(Map<String, dynamic> json) {
-    return switch (json) {
+    return switch(json) {
       {
         'id': final int id,
         'name': final String name,

@@ -13,7 +13,7 @@ import '../../services/users_login/user_login_service.dart';
 part 'aplication_providers.g.dart';
 
 @Riverpod(keepAlive: true)
-RestClient restClient(RestClientRef ref) => restClient(ref);
+RestClient restClient(RestClientRef ref) => RestClient();
 
 @Riverpod(keepAlive: true)
 UserRepository userRepository(UserRepositoryRef ref) =>
@@ -27,7 +27,7 @@ UserLoginService userLoginService(UserLoginServiceRef ref) =>
 Future<UserModel> getMe(GetMeRef ref) async {
   final result = await ref.watch(userRepositoryProvider).me();
 
-  return switch (result) {
+  return switch(result) {
     Success(value: final userModel) => userModel,
     Failure(:final exception) => throw exception,
   };

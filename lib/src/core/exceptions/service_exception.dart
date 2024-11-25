@@ -1,4 +1,4 @@
-class ServiceException implements Exception {
+final class ServiceException implements Exception {
 
 final String message;
 

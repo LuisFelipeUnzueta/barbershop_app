@@ -33,6 +33,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     //.notifier em vez de trazer o estado do riverpod ele traz a instancia da viewModel
     final LoginVm(:login) = ref.watch(loginVmProvider.notifier);
 
+
     ref.listen(loginVmProvider, (_, state) {
       switch (state) {
         case LoginState(status: LoginStateStatus.initial):
@@ -42,10 +43,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         case LoginState(status: LoginStateStatus.error):
           Messages.showError('Erro ao realizar login.', context);
         case LoginState(status: LoginStateStatus.admLogin):
-          Navigator.of(context).pushNamedAndRemoveUntil('/home/adm', (route) => false);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/home/adm', (route) => false);
           break;
         case LoginState(status: LoginStateStatus.employeeLogin):
-          Navigator.of(context).pushNamedAndRemoveUntil('/home/employee', (route) => false);
+          Navigator.of(context)
+              .pushNamedAndRemoveUntil('/home/employee', (route) => false);
           break;
       }
     });
@@ -134,18 +137,22 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                   case (false || null):
                                     Messages.showError(
                                         'Campos inválidos', context);
+                                        break;
                                   case true:
-                                    login(emailEC.text, passwordEC.text);
+                                    setState(() {
+                                      login(emailEC.text, passwordEC.text);
+                                    });
                                 }
                               },
                               child: const Text('Acessar'))
                         ],
                       ),
-                       Align(
+                      Align(
                         alignment: Alignment.bottomCenter,
                         child: InkWell(
-                          onTap: (){
-                            Navigator.of(context).pushNamed('/auth/register/user');
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushNamed('/auth/register/user');
                           },
                           child: const Text(
                             'Criar conta',

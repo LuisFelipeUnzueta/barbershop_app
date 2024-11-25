@@ -10,7 +10,7 @@ abstract interface class UserRepository {
 
   Future<Either<RepositoryException, UserModel>> me();
 
-  Future<Either<RepositoryException, Nil>> registterAdmin(({
+  Future<Either<RepositoryException, Nil>> registerAdmin(({
     String name,
     String email,
     String password,

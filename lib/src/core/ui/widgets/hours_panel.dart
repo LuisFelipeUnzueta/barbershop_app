@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 class HoursPanel extends StatelessWidget {
   final int startTime;
   final int endTime;
+  final ValueChanged<int> onPressedHour;
 
   const HoursPanel({
     super.key,
     required this.startTime,
     required this.endTime,
+    required this.onPressedHour
   });
 
   @override
@@ -30,6 +32,8 @@ class HoursPanel extends StatelessWidget {
             for (int i = startTime; i <= endTime; i++)
               TimeButton(
                 label: '${i.toString().padLeft(2, '0')}:00',
+                value: i,
+                onPressed: onPressedHour,
               )
           ],
         )
@@ -38,31 +42,53 @@ class HoursPanel extends StatelessWidget {
   }
 }
 
-class TimeButton extends StatelessWidget {
+class TimeButton extends StatefulWidget {
   final String label;
+  final int value;
+  final ValueChanged<int> onPressed;
 
-  const TimeButton({super.key, required this.label});
+  const TimeButton(
+      {super.key,
+      required this.label,
+      required this.value,
+      required this.onPressed});
+
+  @override
+  State<TimeButton> createState() => _TimeButtonState();
+}
+
+class _TimeButtonState extends State<TimeButton> {
+  var selected = false;
 
   @override
   Widget build(BuildContext context) {
+    final textColor = selected ? Colors.white : ColorsConstants.grey;
+    var buttonColor = selected ? ColorsConstants.brown : Colors.white;
+    final buttonBorderColor =
+        selected ? ColorsConstants.brown : ColorsConstants.grey;
+
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: InkWell(
-        onTap: () {},
+        borderRadius: BorderRadius.circular(8),
+        onTap: () {
+          setState(() {
+            selected = !selected;
+            widget.onPressed(widget.value);
+          });
+        },
         child: Container(
           width: 64,
           height: 36,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Colors.white,
-              border: Border.all(color: ColorsConstants.grey)),
+              color: buttonColor,
+              border: Border.all(color: buttonBorderColor)),
           child: Center(
               child: Text(
-            label,
-            style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w500,
-                color: ColorsConstants.grey),
+            widget.label,
+            style: TextStyle(
+                fontSize: 12, fontWeight: FontWeight.w500, color: textColor),
           )),
         ),
       ),
