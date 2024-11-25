@@ -32,7 +32,7 @@ class UserRegisterVm extends _$UserRegisterVm {
 
     final registerResult =
         await userRegisterAdmService.execute(userData).asyncLoader();
-    switch (registerResult) {
+    switch(registerResult) {
       case Success():
         ref.invalidate(getMeProvider);
         state = UserRegisterStateStatus.success;

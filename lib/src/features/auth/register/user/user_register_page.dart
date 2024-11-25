@@ -31,11 +31,12 @@ class _UserRegisterPageState extends ConsumerState<UserRegisterPage> {
     final userRegisterVM = ref.watch(userRegisterVmProvider.notifier);
 
     ref.listen(userRegisterVmProvider, (_, state) {
-      switch (state) {
+      switch(state) {
         case UserRegisterStateStatus.initial:
           break;
         case UserRegisterStateStatus.success:
           Navigator.of(context).pushNamed('/auth/register/barbershop');
+          break;
         case UserRegisterStateStatus.error:
           Messages.showError('Erro ao registrar usuário admin', context);
       }
@@ -92,6 +93,7 @@ class _UserRegisterPageState extends ConsumerState<UserRegisterPage> {
                 ),
                 TextFormField(
                   onTapOutside: (_) => context.unfocus(),
+                  obscureText: true,
                   validator: Validatorless.multiple([
                     Validatorless.required('Confirmar senha é obrigatório'),
                     Validatorless.compare(
@@ -108,7 +110,7 @@ class _UserRegisterPageState extends ConsumerState<UserRegisterPage> {
                     minimumSize: const Size.fromHeight(56),
                   ),
                   onPressed: () {
-                    switch (formKey.currentState?.validate()) {
+                    switch(formKey.currentState?.validate()) {
                       case null || false:
                         Messages.showError('Formulário inválido', context);
                       case true:
