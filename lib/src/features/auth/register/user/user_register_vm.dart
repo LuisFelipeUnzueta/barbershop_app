@@ -1,4 +1,4 @@
-import 'package:asyncstate/asyncstate.dart';
+
 import 'package:barbershop_app/src/core/fp/either.dart';
 import 'package:barbershop_app/src/core/providers/aplication_providers.dart';
 import 'package:barbershop_app/src/features/auth/register/user/user_register_providers.dart';
@@ -31,7 +31,7 @@ class UserRegisterVm extends _$UserRegisterVm {
     );
 
     final registerResult =
-        await userRegisterAdmService.execute(userData).asyncLoader();
+        await userRegisterAdmService.execute(userData);
     switch(registerResult) {
       case Success():
         ref.invalidate(getMeProvider);
