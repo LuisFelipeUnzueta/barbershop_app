@@ -1,14 +1,18 @@
+import 'package:barbershop_app/src/core/providers/aplication_providers.dart';
 import 'package:barbershop_app/src/core/ui/barbershop_icons.dart';
 import 'package:barbershop_app/src/core/ui/constants.dart';
+import 'package:barbershop_app/src/core/ui/widgets/barbershop_loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeHeader extends StatelessWidget {
+class HomeHeader extends ConsumerWidget {
   final bool showFilter;
   const HomeHeader({super.key, this.showFilter = true});
 
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final barbershop = ref.watch(getMyBarbershopProvider);
+
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       padding: const EdgeInsets.all(24),
@@ -27,6 +31,58 @@ class HomeHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          barbershop.maybeWhen(
+            data: (barbershopData) {
+              return Row(
+                children: [
+                  const CircleAvatar(
+                    backgroundColor: Color(0xffbdbdbd),
+                    child: SizedBox.shrink(),
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                   Flexible(
+                    child: Text(
+                      barbershopData.name,
+                      overflow: TextOverflow.ellipsis,
+                      style: const  TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  const Expanded(
+                    child: Text(
+                      'Editar',
+                      style: TextStyle(
+                        color: ColorsConstants.brown,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      BarbershopIcons.exit,
+                      color: ColorsConstants.brown,
+                      size: 32,
+                    ),
+                  ),
+                ],
+              );
+            },
+            orElse: () {
+              return const Center(
+                child: BarbershopLoader(),
+              );
+            },
+          ),
           Row(
             children: [
               const CircleAvatar(
