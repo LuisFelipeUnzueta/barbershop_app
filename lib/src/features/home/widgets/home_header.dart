@@ -2,6 +2,7 @@ import 'package:barbershop_app/src/core/providers/aplication_providers.dart';
 import 'package:barbershop_app/src/core/ui/barbershop_icons.dart';
 import 'package:barbershop_app/src/core/ui/constants.dart';
 import 'package:barbershop_app/src/core/ui/widgets/barbershop_loader.dart';
+import 'package:barbershop_app/src/features/home/adm/home_adm_vm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -67,7 +68,9 @@ class HomeHeader extends ConsumerWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      ref.read(homeAdmVmProvider.notifier).logout();
+                    },
                     icon: const Icon(
                       BarbershopIcons.exit,
                       color: ColorsConstants.brown,
@@ -83,48 +86,7 @@ class HomeHeader extends ConsumerWidget {
               );
             },
           ),
-          Row(
-            children: [
-              const CircleAvatar(
-                backgroundColor: Color(0xffbdbdbd),
-                child: SizedBox.shrink(),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              const Flexible(
-                child: Text(
-                  'Andrea',
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 16,
-              ),
-              const Expanded(
-                child: Text(
-                  'Editar',
-                  style: TextStyle(
-                    color: ColorsConstants.brown,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ),
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    BarbershopIcons.exit,
-                    color: ColorsConstants.brown,
-                    size: 32,
-                  )),
-            ],
-          ),
+          
           const SizedBox(
             height: 24,
           ),
