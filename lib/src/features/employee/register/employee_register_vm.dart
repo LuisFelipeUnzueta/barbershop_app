@@ -44,7 +44,8 @@ class EmployeeRegisterVm extends _$EmployeeRegisterVm{
 
   Future<void> register (String? name, String? email, String? password) async {
     final EmployeeRegisterState(:registerAdm, :workDays, :workHours) = state;
-    final asyncLoaderHandler = AsyncLoaderHandler.start();
+    final asyncLoaderHandler = AsyncLoaderHandler();
+    asyncLoaderHandler.start();
 
     final UserRepository(:registerAdmAsEmployee, :registerEmployee) = ref.read(userRepositoryProvider);
 
@@ -75,5 +76,6 @@ class EmployeeRegisterVm extends _$EmployeeRegisterVm{
       case Failure():
         state = state.copyWith(status: EmployeeRegisterStateStatus.error);
     }
+    asyncLoaderHandler.close();
   } 
 }

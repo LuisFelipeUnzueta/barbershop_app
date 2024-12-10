@@ -41,7 +41,7 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
   @override
   Widget build(BuildContext context) {
     final employeeRegisterVM = ref.watch(employeeRegisterVmProvider.notifier);
-    final BarbershopAsyncValue = ref.watch(getMyBarbershopProvider);
+    final barbershopAsyncValue = ref.watch(getMyBarbershopProvider);
 
     ref.listen(employeeRegisterVmProvider.select((state) => state.status),
         (_, status) {
@@ -60,7 +60,7 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
       appBar: AppBar(
         title: const Text('Cadastrar Colaborador'),
       ),
-      body: BarbershopAsyncValue.when(
+      body: barbershopAsyncValue.when(
         data: (barbershopModel) {
           final BarbershopModel(:openingDays, :openingHours) = barbershopModel;
 
@@ -108,8 +108,9 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
                               ),
                               controller: nameEC,
                               onTapOutside: (_) => unfocus(context),
-                              validator:
-                                  Validatorless.required('Campo obrigatório'),
+                              validator: registerAdm
+                                  ? null
+                                  : Validatorless.required('Campo obrigatório'),
                             ),
                             const SizedBox(
                               height: 24,
@@ -123,10 +124,13 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
                                       FloatingLabelBehavior.never,
                                   labelStyle: TextStyle(color: Colors.black)),
                               onTapOutside: (_) => unfocus(context),
-                              validator: Validatorless.multiple([
-                                Validatorless.required('E-mail obrigatório.'),
-                                Validatorless.email('E-mail inválid'),
-                              ]),
+                              validator: registerAdm
+                                  ? null
+                                  : Validatorless.multiple([
+                                      Validatorless.required(
+                                          'E-mail obrigatório.'),
+                                      Validatorless.email('E-mail inválid'),
+                                    ]),
                             ),
                             const SizedBox(
                               height: 24,
@@ -141,11 +145,14 @@ class _EmployeeRegisterPageState extends ConsumerState<EmployeeRegisterPage> {
                                   labelStyle: TextStyle(color: Colors.black)),
                               onTapOutside: (_) => unfocus(context),
                               obscureText: true,
-                              validator: Validatorless.multiple([
-                                Validatorless.required('Senha obrigatória'),
-                                Validatorless.min(6,
-                                    'Senha deve conter no mínimo 6 caracteres.')
-                              ]),
+                              validator: registerAdm
+                                  ? null
+                                  : Validatorless.multiple([
+                                      Validatorless.required(
+                                          'Senha obrigatória'),
+                                      Validatorless.min(6,
+                                          'Senha deve conter no mínimo 6 caracteres.')
+                                    ]),
                             ),
                           ],
                         ),
