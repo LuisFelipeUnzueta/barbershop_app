@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum ScheduleStateStatus { initial, success, showError }
+enum ScheduleStateStatus { initial, success, error }
 
 class ScheduleState {
   final ScheduleStateStatus status;
