@@ -75,6 +75,7 @@ class HomeEmployeePage extends ConsumerWidget {
                                   );
                                 },
                                 loading: () => const BarbershopLoader(),
+                                skipLoadingOnRefresh: false ,
                                 data: (totalSchedule) {
                                   return Text(
                                     '$totalSchedule',
